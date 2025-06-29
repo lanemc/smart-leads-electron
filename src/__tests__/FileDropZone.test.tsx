@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FileDropZone from '../renderer/components/FileDropZone';
 
@@ -19,7 +18,7 @@ describe('FileDropZone', () => {
     );
 
     expect(screen.getByText(/Drop CSV file here or click to browse/i)).toBeInTheDocument();
-    expect(screen.getByText(/csv/i)).toBeInTheDocument();
+    expect(screen.getByText(/Supported format: CSV/i)).toBeInTheDocument();
   });
 
   it('should call onBrowseClick when clicked', () => {

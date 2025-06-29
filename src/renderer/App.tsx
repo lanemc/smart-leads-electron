@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -24,7 +24,7 @@ import DataPreview from './components/DataPreview';
 import ProcessingDialog from './components/ProcessingDialog';
 import ResultsView from './components/ResultsView';
 import { CSVParser } from '../shared/services/csv-parser';
-import { ProcessingStatus, AppState, CSVRow, LeadResult, AppConfig } from '../shared/types/leads';
+import { AppState, LeadResult, AppConfig } from '../shared/types/leads';
 
 const defaultConfig: AppConfig = {
   openai: {

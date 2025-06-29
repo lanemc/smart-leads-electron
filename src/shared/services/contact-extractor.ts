@@ -82,7 +82,8 @@ export class ContactExtractor {
 
     // Additional keyword extraction from text
     const keywordPatterns = [
-      /\b(?:sponsor|sponsorship|presenting sponsor|partner|partnership|corporate|executive|leadership|owner|founder)\b/gi,
+      /\b(?:ceo|president|founder|owner|executive|director|manager)\b/gi,
+      /\b(?:sponsor|sponsorship|presenting sponsor|partner|partnership)\b/gi,
       /\b(?:Kansas City|KC|Royals|baseball|sports|entertainment)\b/gi,
       /\b(?:marketing|sales|business development|ticketing|hospitality)\b/gi
     ];

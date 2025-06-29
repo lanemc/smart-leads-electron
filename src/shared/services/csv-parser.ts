@@ -1,4 +1,4 @@
-import Papa from 'papaparse';
+import Papa, { ParseResult as PapaParseResult } from 'papaparse';
 import { CSVRow } from '../types/leads';
 
 export interface ParseResult {
@@ -18,11 +18,11 @@ export class CSVParser {
         header: true,
         dynamicTyping: false,
         skipEmptyLines: true,
-        complete: (results) => {
+        complete: (results: PapaParseResult<CSVRow>) => {
           if (results.errors.length > 0) {
             resolve({
               success: false,
-              error: `CSV parsing errors: ${results.errors.map(e => e.message).join(', ')}`
+              error: `CSV parsing errors: ${results.errors.map((e: any) => e.message).join(', ')}`
             });
             return;
           }
@@ -48,7 +48,7 @@ export class CSVParser {
             }
           });
         },
-        error: (error) => {
+        error: (error: any) => {
           resolve({
             success: false,
             error: `Failed to parse CSV: ${error.message}`
@@ -64,11 +64,11 @@ export class CSVParser {
         header: true,
         dynamicTyping: false,
         skipEmptyLines: true,
-        complete: (results) => {
+        complete: (results: PapaParseResult<CSVRow>) => {
           if (results.errors.length > 0) {
             resolve({
               success: false,
-              error: `CSV parsing errors: ${results.errors.map(e => e.message).join(', ')}`
+              error: `CSV parsing errors: ${results.errors.map((e: any) => e.message).join(', ')}`
             });
             return;
           }
@@ -94,7 +94,7 @@ export class CSVParser {
             }
           });
         },
-        error: (error) => {
+        error: (error: any) => {
           resolve({
             success: false,
             error: `Failed to parse CSV: ${error.message}`
@@ -134,7 +134,7 @@ export class CSVParser {
     return { isValid: true };
   }
 
-  static exportToCSV(data: any[], filename: string = 'export.csv'): string {
+  static exportToCSV(data: any[]): string {
     const csv = Papa.unparse(data, {
       header: true,
       skipEmptyLines: true
