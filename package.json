@@ -18,9 +18,9 @@
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "package": "electron-builder",
-    "package:win": "electron-builder --win",
-    "package:mac": "electron-builder --mac",
-    "package:linux": "electron-builder --linux"
+    "package:win": "electron-builder --win --publish=never",
+    "package:mac": "electron-builder --mac --publish=never",
+    "package:linux": "electron-builder --linux --publish=never"
   },
   "keywords": [
     "electron",
