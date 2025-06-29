@@ -6,6 +6,11 @@ global.window.electronAPI = {
   showSaveDialog: jest.fn(),
   readFile: jest.fn(),
   writeFile: jest.fn(),
+  saveConfig: jest.fn(),
+  loadConfig: jest.fn(),
+  deleteConfig: jest.fn(),
+  configExists: jest.fn(),
+  validateApiKey: jest.fn(),
   onMenuImportCSV: jest.fn(),
   onMenuExportResults: jest.fn(),
   removeAllListeners: jest.fn()

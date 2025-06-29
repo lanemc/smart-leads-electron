@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, Menu } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs/promises';
+import { ConfigSecurity } from './shared/services/config-security';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -174,4 +175,46 @@ ipcMain.handle('write-file', async (_, filePath: string, content: string) => {
   } catch (error) {
     return { success: false, error: (error as Error).message };
   }
+});
+
+// Configuration management handlers
+ipcMain.handle('save-config', async (_, config) => {
+  try {
+    await ConfigSecurity.saveConfig(config);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: (error as Error).message };
+  }
+});
+
+ipcMain.handle('load-config', async () => {
+  try {
+    const config = await ConfigSecurity.loadConfig();
+    return { success: true, config };
+  } catch (error) {
+    return { success: false, error: (error as Error).message };
+  }
+});
+
+ipcMain.handle('delete-config', async () => {
+  try {
+    await ConfigSecurity.deleteConfig();
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: (error as Error).message };
+  }
+});
+
+ipcMain.handle('config-exists', async () => {
+  try {
+    const exists = await ConfigSecurity.configExists();
+    return { success: true, exists };
+  } catch (error) {
+    return { success: false, error: (error as Error).message };
+  }
+});
+
+ipcMain.handle('validate-api-key', async (_, apiKey: string) => {
+  const isValid = ConfigSecurity.validateApiKey(apiKey);
+  return { success: true, isValid };
 });

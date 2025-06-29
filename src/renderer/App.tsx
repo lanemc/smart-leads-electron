@@ -66,7 +66,7 @@ function App() {
   const [processingOpen, setProcessingOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Setup menu event listeners
+  // Setup menu event listeners and load configuration
   useEffect(() => {
     window.electronAPI.onMenuImportCSV(() => {
       handleImportClick();
@@ -76,11 +76,25 @@ function App() {
       handleExport();
     });
 
+    // Load saved configuration
+    loadSavedConfig();
+
     return () => {
       window.electronAPI.removeAllListeners('menu-import-csv');
       window.electronAPI.removeAllListeners('menu-export-results');
     };
   }, []);
+
+  const loadSavedConfig = async () => {
+    try {
+      const result = await window.electronAPI.loadConfig();
+      if (result.success && result.config) {
+        setState(prev => ({ ...prev, config: result.config }));
+      }
+    } catch (error) {
+      console.warn('Failed to load saved configuration:', error);
+    }
+  };
 
   const handleImportClick = async () => {
     const result = await window.electronAPI.showOpenDialog();

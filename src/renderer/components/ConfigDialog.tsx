@@ -82,10 +82,29 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ open, config, onClose, onSa
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (validateConfig()) {
-      onSave(localConfig);
-      onClose();
+      try {
+        // Validate API key if provided
+        if (localConfig.openai.apiKey) {
+          const validation = await window.electronAPI.validateApiKey(localConfig.openai.apiKey);
+          if (!validation.success || !validation.isValid) {
+            setErrors({ ...errors, apiKey: 'Invalid API key format' });
+            return;
+          }
+        }
+
+        // Save configuration securely
+        const saveResult = await window.electronAPI.saveConfig(localConfig);
+        if (!saveResult.success) {
+          throw new Error(saveResult.error);
+        }
+
+        onSave(localConfig);
+        onClose();
+      } catch (error) {
+        setErrors({ ...errors, general: `Failed to save configuration: ${(error as Error).message}` });
+      }
     }
   };
 

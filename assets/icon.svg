@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kansas City Royals themed icon -->
+  <rect width="512" height="512" rx="64" fill="#004687"/>
+  
+  <!-- Baseball diamond -->
+  <rect x="156" y="156" width="200" height="200" rx="8" fill="#BD9B60" transform="rotate(45 256 256)"/>
+  
+  <!-- Crown symbol -->
+  <path d="M156 180 L196 240 L256 200 L316 240 L356 180 L336 280 L176 280 Z" fill="#FFD700"/>
+  
+  <!-- Data/Chart lines -->
+  <rect x="180" y="320" width="40" height="80" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="232" y="340" width="40" height="60" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="284" y="300" width="40" height="100" fill="#FFFFFF" opacity="0.8"/>
+  
+  <!-- Text "SL" -->
+  <text x="256" y="450" font-family="Arial, sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="#FFFFFF">SL</text>
+</svg>

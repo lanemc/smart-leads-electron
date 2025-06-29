@@ -7,6 +7,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
   readFile: (filePath: string) => ipcRenderer.invoke('read-file', filePath),
   writeFile: (filePath: string, content: string) => ipcRenderer.invoke('write-file', filePath, content),
 
+  // Configuration management
+  saveConfig: (config: any) => ipcRenderer.invoke('save-config', config),
+  loadConfig: () => ipcRenderer.invoke('load-config'),
+  deleteConfig: () => ipcRenderer.invoke('delete-config'),
+  configExists: () => ipcRenderer.invoke('config-exists'),
+  validateApiKey: (apiKey: string) => ipcRenderer.invoke('validate-api-key', apiKey),
+
   // Menu events
   onMenuImportCSV: (callback: () => void) => {
     ipcRenderer.on('menu-import-csv', callback);
